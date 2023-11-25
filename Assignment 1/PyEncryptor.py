@@ -1,13 +1,7 @@
-
 import os
 
 # Substitution: ceasar ez
 # Transcription: playfair
-encryptedNm = "encyptedfile"
-
-textFile = r'/home/ant/UNI/1DV700/Assignment 1/textFile.txt'
-outputFile = f'/home/ant/UNI/1DV700/Assignment 1/{encryptedNm}.txt'
-
 
 # simple playfair cipher
 # setting all necessary functions under the same one for readability
@@ -54,3 +48,12 @@ def caesar_encryption(plain_text, secret_key, output_file):
             file.write(line)
 
     return 'File encrypted under:', output_file
+
+
+encryptedNm = "encyptedfile"
+
+textFile = r'/home/ant/UNI/1DV700/Assignment 1/textFile.txt'
+outputFile = rf'/home/ant/UNI/1DV700/Assignment 1/{encryptedNm}.txt'
+
+with open(textFile, "r", encoding="utf-8") as file:
+    caesar_encryption(file, 5, outputFile)
