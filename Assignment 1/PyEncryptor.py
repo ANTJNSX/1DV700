@@ -2,7 +2,7 @@
 # makes the program not able to open in windows directories.
 
 # Substitution: ceasar ez
-# Transcription: atbash
+# Transposition : atbash
 
 # Simple atbash encryptor, inverting the letters of the words
 # Atbash is symmetric, so decryption is the same as encryption
