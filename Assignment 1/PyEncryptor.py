@@ -21,8 +21,7 @@ def atbash(text):
 
 
 def atbash_encrypt_file(input_file, output_file):
-    try:
-            
+    try:  # catch block for file problems
         with open(input_file, 'r') as file:
             plaintext = file.read()
             encrypted_text = atbash(plaintext)
@@ -37,7 +36,7 @@ def atbash_encrypt_file(input_file, output_file):
 
 
 def atbash_decrypt_file(input_file, output_file):
-    try:
+    try:  # catch block for file problems
         with open(input_file, 'r') as file:
             encrypted_text = file.read()
             decrypted_text = atbash(encrypted_text)
@@ -52,7 +51,7 @@ def atbash_decrypt_file(input_file, output_file):
 
 # simple ceasar encryptor, uses a given key to shift the letters forwards
 def caesar_encryptor(plain_text, secret_key, output_file):
-    try:
+    try:  # catch block for file problems
         with open(plain_text, "r", encoding="utf-8") as plain_text:
             shift = secret_key
             result = []
@@ -91,7 +90,7 @@ def caesar_encryptor(plain_text, secret_key, output_file):
 
 # simple ceasar encryptor, uses a given key to shift the letters forwards
 def caesar_decryptor(encrypted_text, secret_key, output_file):
-    try:
+    try:  # catch block for file problems
         with open(encrypted_text, "r", encoding="utf-8") as encrypted_text:
 
             shift = secret_key
@@ -128,3 +127,30 @@ def caesar_decryptor(encrypted_text, secret_key, output_file):
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
+
+# main loop for multiple uses from inputs
+while True:
+    cipher_type = int(input("\nPick a cipher:\n1. Encrypt: Atbash\n2. Decrypt: Atbash\n3. Encrypt: Ceasar\n4. Decrypt: Ceasar\n\n"))
+
+    match cipher_type:
+        case 1:
+            text_file = str(input("\nName of file to encrypt: "))
+            output_file = "encrypted_" + text_file
+            atbash_encrypt_file(text_file, output_file)
+
+        case 2:
+            text_file = str(input("\nName of file to decrypt: "))
+            output_file = text_file
+            atbash_encrypt_file(text_file, output_file)
+
+        case 3:
+            text_file = str(input("\nName of file to encrypt: "))
+            output_file = "encrypted_" + text_file
+            shift_key = int(input("\nShift key(1-25): "))
+            caesar_encryptor(text_file, shift_key, output_file)
+
+        case 4:
+            text_file = str(input("\nName of file to decrypt: "))
+            output_file = "decrypted_" + text_file
+            shift_key = int(input("\nShift key(1-25): "))
+            caesar_decryptor(text_file, shift_key, output_file)
