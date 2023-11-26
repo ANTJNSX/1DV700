@@ -13,6 +13,7 @@ class HashSet:
 
     # Computes hash value for a word (a string)
     def get_hash(self, word):
+
         wordval = 0
         hashval = 0
         for char in word:
@@ -31,22 +32,24 @@ class HashSet:
         # return wordval
 
     # Doubles size of bucket list
-    def rehash(self):
+    def rehash(self):  # define the 256 bucket limit
         # Create new list with double the size
         # For loop to take out hashnums and turn them back into ascii
         # Ascii % len newlist
         # append
-        newlst = [[] for i in range(2*len(self.buckets))]
-        for element in self.buckets:
-            for name in element:
-                if name is None:
-                    continue
-                else:
-                    wordval = 0
-                    for char in name:
-                        wordval += ord(char)
-                    newlst[wordval % len(newlst)].append(name)
-        self.buckets = newlst
+
+        if len(self.buckets) < 256:
+            newlst = [[] for i in range(2*len(self.buckets))]
+            for element in self.buckets:
+                for name in element:
+                    if name is None:
+                        continue
+                    else:
+                        wordval = 0
+                        for char in name:
+                            wordval += ord(char)
+                        newlst[wordval % len(newlst)].append(name)
+            self.buckets = newlst
         return self.buckets
 
     # Adds a word to set if not already added
