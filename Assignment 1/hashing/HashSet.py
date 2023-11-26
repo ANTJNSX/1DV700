@@ -32,7 +32,7 @@ class HashSet:
 
         # return hash_val
 
-        # Hashing solution nr 3 optimised for speratic behaviour
+        # Hashing solution nr 3 optimised for sporadic behaviour
 
         prime = 31
         hash_val = 0
@@ -45,7 +45,7 @@ class HashSet:
 
         return hash_val
 
-        # Not needed when set bucket size to 256
+        # Rehashing not needed when set bucket size to 256
     # Doubles size of bucket list
     # def rehash(self):
     #     if len(self.buckets) < 256:
