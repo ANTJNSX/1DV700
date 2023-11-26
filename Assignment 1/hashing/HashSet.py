@@ -14,6 +14,7 @@ class HashSet:
     # Computes hash value for a word (a string)
     def get_hash(self, word):
         # Hashing solution nr 1
+
         # wordval = 0
         # hashval = 0
         # for char in word:
@@ -21,12 +22,26 @@ class HashSet:
         # hashval = wordval % len(self.buckets)
         # return hashval
 
-        # Hashing solution nr 2 optimized
+        # Hashing solution nr 2 optimised
+
+        # prime = 31
+        # hash_val = 0
+
+        # for char in word:
+        #     hash_val = (hash_val * prime + ord(char)) % 256
+
+        # return hash_val
+
+        # Hashing solution nr 3 optimised for speratic behaviour
+
         prime = 31
         hash_val = 0
 
-        for char in word:
-            hash_val = (hash_val * prime + ord(char)) % 256
+        # for each letter, increase the hash with the prime times
+        # the ascii letter and take all of that to the
+        # power of the letters index
+        for i in range(len(word)):
+            hash_val = ((hash_val * prime + ord(word[i])**i)) % 256
 
         return hash_val
 
