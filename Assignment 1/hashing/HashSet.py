@@ -7,50 +7,41 @@ class HashSet:
     buckets: List[List] = None
     size: int = 0
 
-    def init(self):
+    def __init__(self):
         self.size = 0
-        self.buckets = [[] for i in range(8)]
+        self.buckets = [[] for i in range(256)]
 
     # Computes hash value for a word (a string)
     def get_hash(self, word):
-
-        wordval = 0
-        hashval = 0
-        for char in word:
-            wordval += ord(char)
-        hashval = wordval % len(self.buckets)
-        return hashval
-
-    # Alternative solution By Anton
+        # Hashing solution nr 1
         # wordval = 0
-        # prime = 31
+        # hashval = 0
+        # for char in word:
+        #     wordval += ord(char)
+        # hashval = wordval % len(self.buckets)
+        # return hashval
 
-        # for i, char in enumerate(word):
-        # wordval = (wordval + (ord(char) - ord('a') + 1) * (prime ** i))
-        # # we use the position of the char as a multiplyer to the prime
+        # Hashing solution nr 2 optimized
+        prime = 31
+        hash_val = 0
 
-        # return wordval
+        for char in word:
+            hash_val = (hash_val * prime + ord(char)) % 256
 
+        return hash_val
+
+        # Not needed when set bucket size to 256
     # Doubles size of bucket list
-    def rehash(self):  # define the 256 bucket limit
-        # Create new list with double the size
-        # For loop to take out hashnums and turn them back into ascii
-        # Ascii % len newlist
-        # append
+    # def rehash(self):
+    #     if len(self.buckets) < 256:
+    #         new_lst = [[] for _ in range(2 * len(self.buckets))]
+    #         for element in self.buckets:
+    #             for name in element:
+    #                 if name is not None:
+    #                     new_lst[self.get_hash(name)].append(name)
+    #         self.buckets = new_lst
 
-        if len(self.buckets) < 256:
-            newlst = [[] for i in range(2*len(self.buckets))]
-            for element in self.buckets:
-                for name in element:
-                    if name is None:
-                        continue
-                    else:
-                        wordval = 0
-                        for char in name:
-                            wordval += ord(char)
-                        newlst[wordval % len(newlst)].append(name)
-            self.buckets = newlst
-        return self.buckets
+    #     return self.buckets
 
     # Adds a word to set if not already added
     def add(self, word):
@@ -60,8 +51,8 @@ class HashSet:
             bucket = self.get_hash(word)
             self.buckets[bucket].append(word)
             self.size += 1
-            if len(self.buckets) == self.size:
-                self.rehash()
+            # if len(self.buckets) == self.size:
+            #     self.rehash()
         return self.buckets
 
     # Returns a string representation of the set content
